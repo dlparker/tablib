@@ -6,6 +6,7 @@
 import tablib
 
 import sys
+import decimal
 from tablib.packages import omnijson as json
 
 
@@ -14,6 +15,8 @@ extensions = ('json', 'jsn')
 
 
 def date_handler(obj):
+    if type(obj) is decimal.Decimal:
+        return float(obj)
     return obj.isoformat() if hasattr(obj, 'isoformat') else obj
 
 
